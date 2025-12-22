@@ -14,8 +14,15 @@ public class CloudsSystem : MonoBehaviour
     [SerializeField] int startPositionZ;
     [SerializeField] int endPositionZ;
     
+    [SerializeField] int initialCloudCount = 25;
+    
     List<GameObject> clouds = new List<GameObject>();
     bool isCreatingCloud = false;
+
+    void Start()
+    {
+        CreateInitialClouds();
+    }
 
     void Update()
     {
@@ -40,6 +47,37 @@ public class CloudsSystem : MonoBehaviour
         }
     }
 
+    void CreateInitialClouds()
+    {
+        for (int i = 0; i < initialCloudCount && i < maxClouds; i++)
+        {
+            CreateCloudAtRandomPosition();
+        }
+    }
+
+    void CreateCloudAtRandomPosition()
+    {
+        float randomX = Random.Range(startPositionX, endPositionX + 1);
+        float randomZ = Random.Range(startPositionZ, endPositionZ + 1);
+        
+        GameObject cloud = Instantiate(
+            cloudsPrefabs[Random.Range(0, cloudsPrefabs.Length)], 
+            new Vector3(randomX, 50, randomZ), 
+            transform.rotation
+        );
+        
+        float randSize = Random.Range(0.5f, 2f);
+        cloud.transform.localScale = new Vector3(randSize, randSize, randSize);
+        
+        CloudScript cloudScript = cloud.GetComponent<CloudScript>();
+        if (cloudScript != null)
+        {
+            cloudScript.speed = -cloudSpeed;
+        }
+        
+        clouds.Add(cloud);
+    }
+
     IEnumerator CreateCloud()
     {
         isCreatingCloud = true;
@@ -49,7 +87,7 @@ public class CloudsSystem : MonoBehaviour
         
         GameObject cloud = Instantiate(
             cloudsPrefabs[Random.Range(0, cloudsPrefabs.Length)], 
-            new Vector3(startPositionX, 50, randomZ), 
+            new Vector3(startPositionX, 30, randomZ), 
             transform.rotation
         );
         float randSize = Random.Range(0.5f, 2f);
