@@ -51,7 +51,7 @@ public class MapGenerator : MonoBehaviour
 
     void PlaceMainTower(Vector3 pos)
     {
-        Instantiate(mainTower, pos, Quaternion.identity);
+        Instantiate(mainTower, pos, Quaternion.identity, transform);
     }
     
     public void GenerateMap()
