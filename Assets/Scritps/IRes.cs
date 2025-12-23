@@ -1,5 +1,5 @@
 
 public interface IRes
 {
-    public enum Resourses { Wood, Stone, OilCristall }
+    public enum Resourses { Wood, Stone, OilCristall, None }
 }

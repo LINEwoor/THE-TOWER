@@ -2,8 +2,9 @@ using UnityEngine;
 
 public class ResoursesUppers : MonoBehaviour,IRes
 {
-    public enum Resourses { Wood, Stone, OilCristall }
+    public enum Resourses { Wood, Stone, OilCristall, None }
     private ResourcesSystem _resourcesSystem;
+    public ResoursesUppers.Resourses thisRes;
 
     [SerializeField] private int[] resUps;
     void Start()
@@ -19,19 +20,17 @@ public class ResoursesUppers : MonoBehaviour,IRes
 
     private void OnTriggerEnter(Collider other)
     {
-        ResoursesUppers.Resourses thisRes = (ResoursesUppers.Resourses)other.GetComponent<Res>().ress;
-        if (thisRes == Resourses.Wood)
+        
+
+        if (other.tag == "Resourses")
         {
-            _resourcesSystem.AddWood(resUps[0]);
+            thisRes = (ResoursesUppers.Resourses)other.GetComponent<Res>().ress;
+            other.tag = "Untagged";
+            other.gameObject.SetActive(false);
         }
-        if (thisRes == Resourses.Stone)
+        if (other.tag == "Tower")
         {
-            _resourcesSystem.AddStone(resUps[1]);
+            thisRes = Resourses.None;
         }
-        if (thisRes == Resourses.OilCristall)
-        {
-            _resourcesSystem.AddCristall(resUps[2]);
-        }
-        Destroy(other.gameObject);
     }
 }
