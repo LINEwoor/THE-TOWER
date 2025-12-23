@@ -6,6 +6,8 @@ TagManager:
   tags:
   - Resourses
   - Tower
+  - Enemy
+  - Dead
   layers:
   - Default
   - TransparentFX
