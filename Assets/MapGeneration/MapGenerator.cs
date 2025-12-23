@@ -1,4 +1,8 @@
+using System;
+using Unity.AI.Navigation;
+using Unity.VisualScripting;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class MapGenerator : MonoBehaviour
 {
@@ -22,8 +26,10 @@ public class MapGenerator : MonoBehaviour
 
     [Header("Прочее")]
 
-    public Camera camera;
+    Camera camera;
     public GameObject mainTower;
+
+    private GameObject levelFolder;
     
     
     [System.Serializable]
@@ -40,6 +46,11 @@ public class MapGenerator : MonoBehaviour
     
     void Awake()
     {
+        levelFolder = new GameObject();
+        levelFolder.name = "Level";
+        levelFolder.transform.position = Vector3.zero;
+        
+        camera = Camera.main;
         GenerateMap();
     }
 
@@ -77,8 +88,13 @@ public class MapGenerator : MonoBehaviour
             }
         }
 
-        PlaceMainTower(new Vector3(mapWidth * tileSize / 2, 1, mapHeight * tileSize / 2));
+        PlaceMainTower(new Vector3(mapWidth * tileSize / 2, 0, mapHeight * tileSize / 2));
         PlaceDecorations();
+        
+        
+        transform.AddComponent<NavMeshSurface>();
+        NavMeshSurface ns = transform.GetComponent<NavMeshSurface>();
+        ns.BuildNavMesh();
     }
     
     void ClearMap()
@@ -107,7 +123,7 @@ public class MapGenerator : MonoBehaviour
         
         if (prefab)
         {
-            GameObject tile = Instantiate(prefab, pos, Quaternion.identity, transform);
+            GameObject tile = Instantiate(prefab, pos, Quaternion.identity, levelFolder.transform);
             
             grid[x, y] = new TileData
             {

@@ -1,0 +1,130 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &7419523020098389058
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4852543059089127208}
+  - component: {fileID: 1433954963749721627}
+  - component: {fileID: 5768336809942245594}
+  - component: {fileID: 7340757307868453966}
+  - component: {fileID: 6670090731772623702}
+  - component: {fileID: 6083292734372736596}
+  m_Layer: 0
+  m_Name: GameManager
+  m_TagString: GameController
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4852543059089127208
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7419523020098389058}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.4468716, y: 5.5094323, z: 2.2973}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1433954963749721627
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7419523020098389058}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bf7f6c817ca20e14a918844ce13c5ee6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  upgradesToShow: 3
+  allUpgrades:
+  - {fileID: 11400000, guid: 5c1620ed6b1264d4f9c2fef0daeb308f, type: 2}
+  - {fileID: 11400000, guid: cbbdf6bd28787934f9a709120d9b1997, type: 2}
+  - {fileID: 11400000, guid: e1c15e3e5ed5a904cb42dccfac4c967e, type: 2}
+  - {fileID: 11400000, guid: 2ee65f418a5f60c40811fbf925cc4e7c, type: 2}
+  OnUpgradesReady:
+    m_PersistentCalls:
+      m_Calls: []
+  OnUpgradeSelected:
+    m_PersistentCalls:
+      m_Calls: []
+  upgrades: {fileID: 6083292734372736596}
+--- !u!114 &5768336809942245594
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7419523020098389058}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cbde2ae2b68f0ec4d892db56ae69039e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mapWidth: 100
+  mapHeight: 100
+  tileSize: 1
+  grassPrefab: {fileID: 1324065551131666060, guid: 799781016f5bf254d8dea4789416ebed, type: 3}
+  dirtPrefab: {fileID: 5738187420809090597, guid: 9ee640879498da74eaa83a77d483cc69, type: 3}
+  stonePrefab: {fileID: 4808109567541246743, guid: a55fbca5521b8934cac38a1e45193a7c, type: 3}
+  noiseScale: 5
+  dirtThreshold: 0.6
+  stoneThreshold: 0.8
+  decorations: []
+  mainTower: {fileID: 3858414440965356357, guid: 353c9c43ca5129c48a57dce57635fc5f, type: 3}
+--- !u!114 &7340757307868453966
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7419523020098389058}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 143aef679462de54db6ea612615db911, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cloudsPrefabs: []
+  cloudSpeed: 0
+  maxClouds: 0
+  startPositionX: 0
+  endPositionX: 0
+  startPositionZ: 0
+  endPositionZ: 0
+  initialCloudCount: 25
+--- !u!114 &6670090731772623702
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7419523020098389058}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eea3f7a7e1bc2b2468e6e40d038164ae, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &6083292734372736596
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7419523020098389058}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 47c8250c1c744e54f929a598a6fd0b66, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

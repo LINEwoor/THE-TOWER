@@ -30,9 +30,13 @@ public class UpgradeCanvasScript : MonoBehaviour
             UpgradeManager.Instance.OnUpgradesReady.AddListener(ShowUpgrades);
             UpgradeManager.Instance.OnUpgradeSelected.AddListener(OnAnyUpgradeSelected);
         }
-        
+
         if (rerollButton != null)
+        {
             rerollButton.onClick.AddListener(RerollUpgrades);
+            Debug.Log(1);
+        }
+
     }
 
     private void Update()

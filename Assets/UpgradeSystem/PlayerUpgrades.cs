@@ -12,19 +12,19 @@ public class PlayerUpgrades : MonoBehaviour
 
     public void AddHealth(float amount)
     {
-        stats.maxHp += amount;
+        stats.MaxHp += amount;
         Debug.Log($"Добавлено {amount} здоровья");
     }
     
     public void AddDamage(float amount)
     {
-        stats.dmg += amount;
+        stats.Dmg += amount;
         Debug.Log($"Добавлено {amount} урона");
     }
     
     public void AddRange(float amount)
     {
-        stats.range += amount;
+        stats.Range += amount;
         Debug.Log($"Добавлено {amount} дальности");
     }
 }
