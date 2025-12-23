@@ -34,9 +34,7 @@ public class UpgradeCanvasScript : MonoBehaviour
         if (rerollButton != null)
         {
             rerollButton.onClick.AddListener(RerollUpgrades);
-            Debug.Log(1);
         }
-
     }
 
     private void Update()
@@ -136,7 +134,7 @@ public class UpgradeCanvasScript : MonoBehaviour
         }
     }
     
-    private void OnAnyUpgradeSelected()
+    private void OnAnyUpgradeSelected(UpgradeData upgrade)
     {
     }
     

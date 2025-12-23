@@ -14,9 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   displayName: DmgUp
   description: increase damage
-  icon: {fileID: 0}
-  rarity: 0
+  icon: {fileID: 21300000, guid: c21cb1a4e29c94745a1ab8bac994510c, type: 3}
+  rarity: 1
   idEffect: damage
   value: 1
-  resourceType: 0
-  costAmount: 5
+  resourceType: 2
+  costAmount: 2

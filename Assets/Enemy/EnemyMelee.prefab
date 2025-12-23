@@ -162,13 +162,13 @@ MonoBehaviour:
   stats:
     Damage: 5
     MoveSpeed: 3.5
-    AttackRange: 2
+    AttackRange: 2.5
     AttackCooldown: 1
     DetectionRange: 15
     SecondaryTargetRange: 5
   targetLayer:
     serializedVersion: 2
-    m_Bits: 64
+    m_Bits: 0
   mainTarget: {fileID: 0}
   attackAngle: 60
   pushForce: 0

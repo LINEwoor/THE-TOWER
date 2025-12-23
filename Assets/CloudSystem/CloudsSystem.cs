@@ -1,105 +1,105 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using System.Collections;
 
 public class CloudsSystem : MonoBehaviour
 {
-    [SerializeField] GameObject[] cloudsPrefabs;
-    [SerializeField] private float cloudSpeed;
-    [SerializeField] int maxClouds;
+    [SerializeField] private Sprite[] cloudsPrefabs;
+    [SerializeField] private float spawnInterval = 2f;
+    [SerializeField] private float minY = 2f;
+    [SerializeField] private float maxY = 5f;
+    [SerializeField] private float minSpeed = 0.5f;
+    [SerializeField] private float maxSpeed = 2f;
+    [SerializeField] private float minScale = 0.5f;
+    [SerializeField] private float maxScale = 1.5f;
     
-    [SerializeField] int startPositionX;
-    [SerializeField] int endPositionX;
+    [SerializeField] private float spawnX = 12f;
+    [SerializeField] private float destroyX = -12f;
     
-    [SerializeField] int startPositionZ;
-    [SerializeField] int endPositionZ;
+    [SerializeField] private int initialCloudCount = 5;
+    [SerializeField] private float minInitialX = -8f;
+    [SerializeField] private float maxInitialX = 8f;
     
-    [SerializeField] int initialCloudCount = 25;
-    
-    List<GameObject> clouds = new List<GameObject>();
-    bool isCreatingCloud = false;
-
     void Start()
     {
-        CreateInitialClouds();
+        SpawnInitialClouds();
+        StartCoroutine(SpawnClouds());
     }
+    
+    void SpawnInitialClouds()
+    {
+        for (int i = 0; i < initialCloudCount; i++)
+        {
+            SpawnSingleCloud(true);
+        }
+    }
+    
+    IEnumerator SpawnClouds()
+    {
+        while (true)
+        {
+            SpawnSingleCloud(false);
+            yield return new WaitForSeconds(spawnInterval);
+        }
+    }
+    
+    void SpawnSingleCloud(bool isInitial)
+    {
+        if (cloudsPrefabs == null || cloudsPrefabs.Length == 0)
+        {
+            return;
+        }
+        
+        GameObject cloud = new GameObject("Cloud");
+        
+        MeshRenderer meshRenderer = cloud.AddComponent<MeshRenderer>();
+        MeshFilter meshFilter = cloud.AddComponent<MeshFilter>();
+        
+        Sprite sprite = cloudsPrefabs[Random.Range(0, cloudsPrefabs.Length)];
+        
+        Mesh mesh = new Mesh();
+        mesh.vertices = System.Array.ConvertAll(sprite.vertices, i => (Vector3)i);
+        mesh.uv = sprite.uv;
+        mesh.triangles = System.Array.ConvertAll(sprite.triangles, i => (int)i);
+        
+        meshFilter.mesh = mesh;
+        
+        meshRenderer.material = new Material(Shader.Find("Standard"));
+        meshRenderer.shadowCastingMode = UnityEngine.Rendering.ShadowCastingMode.On;
+        meshRenderer.receiveShadows = true;
+        
+        float randomY = Random.Range(minY, maxY);
+        float randomX = isInitial ? Random.Range(minInitialX, maxInitialX) : spawnX;
+        cloud.transform.position = new Vector3(randomX, 35, randomY);
+        
+        float randomScale = Random.Range(minScale, maxScale);
+        cloud.transform.localScale = new Vector3(randomScale, randomScale, 1);
+        
+        Color cloudColor = Color.white;
+        cloudColor.a = Random.Range(0.6f, 0.9f);
+        meshRenderer.material.color = cloudColor;
+        
+        CloudMovement movement = cloud.AddComponent<CloudMovement>();
+        movement.moveSpeed = Random.Range(minSpeed, maxSpeed);
+        movement.destroyX = destroyX;
+        
+        cloud.transform.rotation = Quaternion.Euler(90, 0, 0);
+        cloud.transform.SetParent(transform);
+        
+    }
+}
 
+public class CloudMovement : MonoBehaviour
+{
+    public float moveSpeed = 1f;
+    public float destroyX = -12f;
+    
     void Update()
     {
-        if (clouds.Count < maxClouds && !isCreatingCloud)
+        transform.Translate(Vector3.left * moveSpeed * Time.deltaTime);
+        
+        if (transform.position.x < destroyX)
         {
-            StartCoroutine(CreateCloud());
+            Destroy(gameObject);
         }
-
-        for (int i = clouds.Count - 1; i >= 0; i--)
-        {
-            if (clouds[i] == null)
-            {
-                clouds.RemoveAt(i);
-                continue;
-            }
-            
-            if (clouds[i].transform.position.x <= endPositionX)
-            {
-                Destroy(clouds[i]);
-                clouds.RemoveAt(i);
-            }
-        }
-    }
-
-    void CreateInitialClouds()
-    {
-        for (int i = 0; i < initialCloudCount && i < maxClouds; i++)
-        {
-            CreateCloudAtRandomPosition();
-        }
-    }
-
-    void CreateCloudAtRandomPosition()
-    {
-        float randomX = Random.Range(startPositionX, endPositionX + 1);
-        float randomZ = Random.Range(startPositionZ, endPositionZ + 1);
-        
-        GameObject cloud = Instantiate(
-            cloudsPrefabs[Random.Range(0, cloudsPrefabs.Length)], 
-            new Vector3(randomX, 50, randomZ), 
-            transform.rotation
-        );
-        
-        float randSize = Random.Range(0.5f, 2f);
-        cloud.transform.localScale = new Vector3(randSize, randSize, randSize);
-        
-        CloudScript cloudScript = cloud.GetComponent<CloudScript>();
-        if (cloudScript != null)
-        {
-            cloudScript.speed = -cloudSpeed;
-        }
-        
-        clouds.Add(cloud);
-    }
-
-    IEnumerator CreateCloud()
-    {
-        isCreatingCloud = true;
-        yield return new WaitForSeconds(Random.Range(0f, 3f));
-        
-        float randomZ = Random.Range(startPositionZ, endPositionZ + 1);
-        
-        GameObject cloud = Instantiate(
-            cloudsPrefabs[Random.Range(0, cloudsPrefabs.Length)], 
-            new Vector3(startPositionX, 30, randomZ), 
-            transform.rotation
-        );
-        float randSize = Random.Range(0.5f, 2f);
-        cloud.transform.localScale = new Vector3(randSize, randSize, randSize);
-        
-        CloudScript cloudScript = cloud.GetComponent<CloudScript>();
-        if (cloudScript != null)
-        {
-            cloudScript.speed = -cloudSpeed;
-        }
-        
-        clouds.Add(cloud);
-        isCreatingCloud = false;
     }
 }

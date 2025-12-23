@@ -2,6 +2,7 @@ using System;
 using Unity.AI.Navigation;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.AI;
 using Random = UnityEngine.Random;
 
 public class MapGenerator : MonoBehaviour
@@ -21,8 +22,7 @@ public class MapGenerator : MonoBehaviour
     public float dirtThreshold = 0.6f;
     public float stoneThreshold = 0.8f;
     
-    [Header("Декорации")]
-    public Decoration[] decorations;
+
 
     [Header("Прочее")]
 
@@ -31,16 +31,6 @@ public class MapGenerator : MonoBehaviour
 
     private GameObject levelFolder;
     
-    
-    [System.Serializable]
-    public class Decoration
-    {
-        public GameObject prefab;
-        public TileType[] allowedTiles;
-        [Range(0f, 1f)] public float minNoise = 0f;
-        [Range(0f, 1f)] public float maxNoise = 1f;
-        [Range(0f, 1f)] public float density = 0.1f;
-    }
     
     private TileData[,] grid;
     
@@ -89,11 +79,11 @@ public class MapGenerator : MonoBehaviour
         }
 
         PlaceMainTower(new Vector3(mapWidth * tileSize / 2, 0, mapHeight * tileSize / 2));
-        PlaceDecorations();
         
         
         transform.AddComponent<NavMeshSurface>();
         NavMeshSurface ns = transform.GetComponent<NavMeshSurface>();
+        ns.useGeometry = NavMeshCollectGeometry.PhysicsColliders;
         ns.BuildNavMesh();
     }
     
@@ -146,74 +136,7 @@ public class MapGenerator : MonoBehaviour
         };
     }
     
-    void PlaceDecorations()
-    {
-        if (decorations == null || decorations.Length == 0) return;
-        
-        foreach (Decoration decor in decorations)
-        {
-            if (decor.prefab == null) continue;
-            
-            float decorOffsetX = Random.Range(0f, 100f);
-            float decorOffsetY = Random.Range(0f, 100f);
-            
-            for (int x = 0; x < mapWidth; x++)
-            {
-                for (int y = 0; y < mapHeight; y++)
-                {
-                    TileData tile = grid[x, y];
-                    
-                    if (!CanPlaceDecoration(tile, decor)) continue;
-                    
-                    float decorNoise = Mathf.PerlinNoise(
-                        (x + decorOffsetX) * 5f, 
-                        (y + decorOffsetY) * 5f
-                    );
-                    
-                    if (decorNoise < decor.density)
-                    {
-                        PlaceSingleDecoration(tile, decor);
-                    }
-                }
-            }
-        }
-    }
     
-    bool CanPlaceDecoration(TileData tile, Decoration decor)
-    {
-        if (decor.allowedTiles != null && decor.allowedTiles.Length > 0)
-        {
-            bool allowed = false;
-            foreach (TileType allowedType in decor.allowedTiles)
-            {
-                if (tile.type == allowedType)
-                {
-                    allowed = true;
-                    break;
-                }
-            }
-            if (!allowed) return false;
-        }
-        
-        return tile.noiseValue >= decor.minNoise && tile.noiseValue <= decor.maxNoise;
-    }
-    
-    void PlaceSingleDecoration(TileData tile, Decoration decor)
-    {
-        Vector3 tileCenter = new Vector3(
-            tile.gridPosition.x * tileSize,
-            0,
-            tile.gridPosition.y * tileSize
-        );
-        
-        float offsetX = Random.Range(-tileSize * 0.3f, tileSize * 0.3f);
-        float offsetZ = Random.Range(-tileSize * 0.3f, tileSize * 0.3f);
-        
-        Vector3 pos = tileCenter + new Vector3(offsetX, 0, offsetZ);
-        Quaternion rot = Quaternion.Euler(0, Random.Range(0, 360f), 0);
-        
-        Instantiate(decor.prefab, pos, rot, tile.currentTileObject.transform);
-    }
     
     public TileData GetTileAtWorldPosition(Vector3 worldPosition)
     {

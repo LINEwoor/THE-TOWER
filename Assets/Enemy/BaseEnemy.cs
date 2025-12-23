@@ -46,6 +46,7 @@ public abstract class BaseEnemy : MonoBehaviour, IEnemy
     protected virtual void Awake()
     {
         healthComponent = GetComponent<Health>();
+        healthComponent.onDeath.AddListener(Die);
         agent = GetComponent<NavMeshAgent>();
         if (agent == null) 
             agent = gameObject.AddComponent<NavMeshAgent>();
@@ -63,7 +64,6 @@ public abstract class BaseEnemy : MonoBehaviour, IEnemy
 
     protected virtual void Start()
     {
-        Debug.Log($"{gameObject.name} начал. MainTarget: {mainTarget?.name}");
         
         if (mainTarget != null)
         {
@@ -217,19 +217,10 @@ public abstract class BaseEnemy : MonoBehaviour, IEnemy
         return health == null || health.CurrentHealth > 0;
     }
 
-    protected virtual void Die()
+    public void Die()
     {
+        ResourcesSystem.Instance.AddCristall(1);
         Destroy(gameObject, 0.1f);
     }
 
-    private void OnDrawGizmosSelected()
-    {
-        if (!Application.isPlaying) return;
-        
-        Gizmos.color = Color.yellow;
-        Gizmos.DrawWireSphere(transform.position, stats.DetectionRange);
-        
-        Gizmos.color = Color.red;
-        Gizmos.DrawWireSphere(transform.position, stats.AttackRange);
-    }
 }

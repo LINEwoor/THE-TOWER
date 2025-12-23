@@ -18,6 +18,11 @@ public class Health : MonoBehaviour
     private void Start()
     {
         InitializeHealth();
+        
+        if (isPlayer && PlayerStats.Instance != null)
+        {
+            PlayerStats.Instance.OnStatsChanged += OnPlayerStatsChanged;
+        }
     }
 
     private void InitializeHealth()
@@ -29,6 +34,14 @@ public class Health : MonoBehaviour
         
         _currentHealth = maxHealth;
         onHealthChange?.Invoke(_currentHealth);
+    }
+
+    private void OnPlayerStatsChanged()
+    {
+        if (isPlayer && PlayerStats.Instance != null)
+        {
+            UpdateMaxHealth(PlayerStats.Instance.MaxHp);
+        }
     }
 
     public void TakeDamage(float amount)
@@ -61,7 +74,6 @@ public class Health : MonoBehaviour
     private void Die()
     {
         onDeath?.Invoke();
-        Destroy(gameObject);
     }
 
     public void UpdateMaxHealth(float newMaxHealth)
@@ -70,5 +82,13 @@ public class Health : MonoBehaviour
         maxHealth = newMaxHealth;
         _currentHealth = maxHealth * healthPercentage;
         onHealthChange?.Invoke(_currentHealth);
+    }
+
+    private void OnDestroy()
+    {
+        if (isPlayer && PlayerStats.Instance != null)
+        {
+            PlayerStats.Instance.OnStatsChanged -= OnPlayerStatsChanged;
+        }
     }
 }

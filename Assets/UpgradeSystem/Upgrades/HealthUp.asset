@@ -14,9 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   displayName: HealthUp
   description: Increase health
-  icon: {fileID: 0}
-  rarity: 2
+  icon: {fileID: 21300000, guid: f988482f17f833e4696b586e511ac2c5, type: 3}
+  rarity: 1
   idEffect: health
-  value: 2
+  value: 15
   resourceType: 1
   costAmount: 3

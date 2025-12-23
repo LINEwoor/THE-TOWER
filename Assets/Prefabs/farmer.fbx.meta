@@ -3,7 +3,27 @@ guid: e0b33df7ebe01124791f4c3f49bd402f
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: farmer_metallic
+    second: {fileID: 2800000, guid: 31a2365de22bbd540a1315e478b2846f, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: farmer_roughness
+    second: {fileID: 2800000, guid: 3860cf7832e8cf84c8928819c1b8a3b3, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: tripo_node_d8f5d3b9-0564-4fc4-9494-257227cb3a0e_BaseColor
+    second: {fileID: 2800000, guid: 198008ff661ee3c4aa0fe7b9d0242d14, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: tripo_node_d8f5d3b9-0564-4fc4-9494-257227cb3a0e_Normal_Bake
+    second: {fileID: 2800000, guid: 432509dda0696754883c2466147b2223, type: 3}
   materials:
     materialImportMode: 2
     materialName: 0

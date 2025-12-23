@@ -14,9 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   displayName: RangeUp
   description: Increase range
-  icon: {fileID: 0}
-  rarity: 0
+  icon: {fileID: 21300000, guid: 52eaecad9f8ef7446b472ebcccb71639, type: 3}
+  rarity: 2
   idEffect: range
   value: 1.5
-  resourceType: 2
-  costAmount: 5
+  resourceType: 0
+  costAmount: 15

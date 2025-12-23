@@ -1,42 +1,43 @@
-using NUnit.Framework;
-using System.Collections.Generic;
 using UnityEngine;
-using static UnityEngine.GraphicsBuffer;
 
 public class Miner : MonoBehaviour
 {
     [SerializeField] private GameObject[] res;
     [SerializeField] private float moveSpeed = 5f;
     [SerializeField] private float rotationSpeed = 10f;
-
     [SerializeField] private GameObject tower;
-
     [SerializeField] private bool isTower;
     [SerializeField] private ResoursesUppers ru;
-
-    [SerializeField] private bool isattsck = false;
+    [SerializeField] private bool isAttacking = false;
     [SerializeField] private int radios = 5;
-
     [SerializeField] private Collider[] hitColliders;
-
-    [SerializeField] private GameObject? target;
+    [SerializeField] private GameObject target;
     [SerializeField] private int damage = 20;
+    [SerializeField] private float timeAttack = 1f;
+    [SerializeField] private float resSearchInterval = 1f;
+    [SerializeField] private float enemySearchInterval = 1f;
+    private float resSearchTimer = 0f;
+    private float enemySearchTimer = 0f;
 
-    [SerializeField] private float TimeAttack = 1;
     void Start()
     {
         ru = GetComponent<ResoursesUppers>();
+        if (tower == null)
+        {
+            tower = GameObject.FindGameObjectWithTag("Player");
+        }
     }
 
     void FoundRes()
     {
         res = GameObject.FindGameObjectsWithTag("Resourses");
     }
+    
     void Move(Transform target)
     {
+        if (target == null) return;
+        
         Vector3 direction = (target.position - transform.position).normalized;
-
-
         direction.y = 0;
 
         if (direction != Vector3.zero)
@@ -47,14 +48,19 @@ public class Miner : MonoBehaviour
 
         transform.position += transform.forward * moveSpeed * Time.deltaTime;
     }
+    
     public GameObject GetClosestObject()
     {
+        if (res == null || res.Length == 0) return null;
+        
         GameObject closest = null;
         float minDist = Mathf.Infinity;
         Vector3 currentPos = transform.position;
 
         foreach (GameObject obj in res)
         {
+            if (obj == null || !obj.activeSelf) continue;
+            
             Vector3 diff = obj.transform.position - currentPos;
             float curDistSqr = diff.sqrMagnitude;
 
@@ -66,48 +72,65 @@ public class Miner : MonoBehaviour
         }
         return closest;
     }
+    
     void MoveSystem()
     {
-        if (ru.thisRes!= ResoursesUppers.Resourses.None)
+        if (ru == null) return;
+        
+        if (ru.IsCarryingResource())
         {
-            Move(tower.transform);
-        }else if (ru.thisRes == ResoursesUppers.Resourses.None)
+            if (tower != null)
+                Move(tower.transform);
+        }
+        else
         {
             GameObject g = GetClosestObject();
-            if(g != null)
+            if (g != null)
                 Move(g.transform);
         }
-
     }
+    
     void Damage()
     {
-        target.GetComponent<Health>().TakeDamage(damage);
+        if (target != null)
+        {
+            Health health = target.GetComponent<Health>();
+            if (health != null)
+            {
+                health.TakeDamage(damage);
+            }
+        }
     }
+    
     void Attack()
     {
+        if (target == null)
+        {
+            isAttacking = false;
+            return;
+        }
 
-        float d = Vector3.Distance(this.transform.position,target.transform.position);
+        float d = Vector3.Distance(this.transform.position, target.transform.position);
         if (d > 1)
         {
             Move(target.transform);
         }
         else
         {
-            if(TimeAttack > 0)
+            if (timeAttack > 0)
             {
-                TimeAttack -= Time.deltaTime;
+                timeAttack -= Time.deltaTime;
             }
             else
             {
                 Damage();
-                TimeAttack = 1f;
+                timeAttack = 1f;
             }
         }
         
         if (target.tag == "Dead")
         {
-
-            isattsck = false;
+            isAttacking = false;
             target = null;
         }
     }
@@ -117,35 +140,49 @@ public class Miner : MonoBehaviour
         hitColliders = Physics.OverlapSphere(this.transform.position, radios);
         foreach (Collider collider in hitColliders)
         {
-            if(collider.gameObject.tag == "Enemy")
+            if (collider.gameObject.tag == "Enemy" && !isAttacking)
             {
-                isattsck = true;
+                isAttacking = true;
                 target = collider.gameObject;
                 break;
             }
         }
     }
+    
     void Update()
     {
-        InvokeRepeating(nameof(FoundRes), 0f, 1f);
-        if (isattsck == false)
+        resSearchTimer -= Time.deltaTime;
+        if (resSearchTimer <= 0)
         {
-            InvokeRepeating(nameof(FoundEnemy), 0f, 1f);
+            FoundRes();
+            resSearchTimer = resSearchInterval;
+        }
+        
+        if (!isAttacking)
+        {
+            enemySearchTimer -= Time.deltaTime;
+            if (enemySearchTimer <= 0)
+            {
+                FoundEnemy();
+                enemySearchTimer = enemySearchInterval;
+            }
+            
             MoveSystem();
         }
-        else Attack();
-        //Move(t.transform);
+        else
+        {
+            Attack();
+        }
     }
 
     private void OnCollisionEnter(Collision collision)
     {
-        if(collision.gameObject.tag == "Tower")
+        if (collision.gameObject.tag == "Tower")
         {
-            ru.thisRes = ResoursesUppers.Resourses.None;
+            if (ru != null)
+            {
+                ru.GetCarriedResourceType();
+            }
         }
-        
-        
     }
-
-    
 }

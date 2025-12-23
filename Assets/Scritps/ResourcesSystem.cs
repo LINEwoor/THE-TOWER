@@ -2,43 +2,55 @@ using UnityEngine;
 
 public class ResourcesSystem : MonoBehaviour
 {
+    public static ResourcesSystem Instance { get; private set; }
+    
     [SerializeField] private int wood;
     [SerializeField] private int stone;
     [SerializeField] private int oilCristall;
-    void Start()
+    
+    public int Wood => wood;
+    public int Stone => stone;
+    public int OilCristall => oilCristall;
+    
+    void Awake()
     {
-        
+        if (Instance == null)
+        {
+            Instance = this;
+        }
     }
-
-    public void AddWood( int w)
+    
+    public void AddWood(int w) => wood += w;
+    public void AddStone(int s) => stone += s;
+    public void AddCristall(int oc) => oilCristall += oc;
+    
+    public bool SubWood(int w)
     {
-        wood += w;
+        if (wood >= w)
+        {
+            wood -= w;
+            return true;
+        }
+        return false;
     }
-    public void AddStone(int s)
+    
+    public bool SubStone(int s)
     {
-        stone += s;
+        if (stone >= s)
+        {
+            stone -= s;
+            return true;
+        }
+        return false;
     }
-    public void AddCristall(int oc)
+    
+    public bool SubCristall(int oc)
     {
-        oilCristall += oc;
-    }
-
-    public void SubWood(int w)
-    {
-        wood -= w;
-    }
-    public void SubStone(int s)
-    {
-        stone -= s;
-    }
-    public void SybCristall(int oc)
-    {
-        oilCristall -= oc;
-    }
-
-
-    void Update()
-    {
-        
+        if (oilCristall >= oc)
+        {
+            oilCristall -= oc;
+            return true;
+        }
+        return false;
     }
 }

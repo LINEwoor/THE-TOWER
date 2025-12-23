@@ -323,13 +323,13 @@ MonoBehaviour:
   stats:
     Damage: 2
     MoveSpeed: 3.5
-    AttackRange: 7
+    AttackRange: 10
     AttackCooldown: 2
     DetectionRange: 7
     SecondaryTargetRange: 7
   targetLayer:
     serializedVersion: 2
-    m_Bits: 64
+    m_Bits: 0
   mainTarget: {fileID: 0}
   projectilePrefab: {fileID: 3770287543140655379, guid: 4fd18918217ceae4881149250b8b756f, type: 3}
   firePoint: {fileID: 2105057993051838809}

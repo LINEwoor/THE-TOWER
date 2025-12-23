@@ -5,9 +5,9 @@ TagManager:
   serializedVersion: 3
   tags:
   - Resourses
-  - Tower
   - Enemy
   - Dead
+  - MinerManager
   layers:
   - Default
   - TransparentFX
