@@ -119,6 +119,26 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &121276474 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2684518315636902144, guid: 353c9c43ca5129c48a57dce57635fc5f, type: 3}
+  m_PrefabInstance: {fileID: 1398904789}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &121276478
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 121276474}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 417f3202ac5300b408bd54e26ba7e92a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  segments: 50
+  lineWidth: 0.1
+  lineColor: {r: 1, g: 0.46839374, b: 0, a: 0.5}
 --- !u!1 &165145304
 GameObject:
   m_ObjectHideFlags: 0
@@ -529,14 +549,6 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 2362009307834941776, guid: 353c9c43ca5129c48a57dce57635fc5f, type: 3}
-      propertyPath: isPlayer
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2362009307834941776, guid: 353c9c43ca5129c48a57dce57635fc5f, type: 3}
-      propertyPath: maxHealth
-      value: 50
-      objectReference: {fileID: 0}
     - target: {fileID: 3129927279259937157, guid: 353c9c43ca5129c48a57dce57635fc5f, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -578,8 +590,8 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3805088686249029271, guid: 353c9c43ca5129c48a57dce57635fc5f, type: 3}
-      propertyPath: maxHp
-      value: 50
+      propertyPath: range
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 3858414440965356357, guid: 353c9c43ca5129c48a57dce57635fc5f, type: 3}
       propertyPath: m_Name
@@ -588,7 +600,10 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 2684518315636902144, guid: 353c9c43ca5129c48a57dce57635fc5f, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 121276478}
   m_SourcePrefab: {fileID: 100100000, guid: 353c9c43ca5129c48a57dce57635fc5f, type: 3}
 --- !u!1 &1466110445
 GameObject:
@@ -678,8 +693,8 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 508546618023616024, guid: a00739a682b148041938cbeea189719c, type: 3}
-      propertyPath: stats.Damage
-      value: 5
+      propertyPath: stats.MoveSpeed
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 3002484290414300206, guid: a00739a682b148041938cbeea189719c, type: 3}
       propertyPath: m_LocalPosition.x
@@ -691,7 +706,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3002484290414300206, guid: a00739a682b148041938cbeea189719c, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 6.0935583
+      value: 10.04
       objectReference: {fileID: 0}
     - target: {fileID: 3002484290414300206, guid: a00739a682b148041938cbeea189719c, type: 3}
       propertyPath: m_LocalRotation.w
@@ -1003,10 +1018,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1133602699602696230, guid: 462fe28f3113db544966599aa406b68a, type: 3}
-      propertyPath: m_PresetInfoIsWorld
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 4369783338585964855, guid: 462fe28f3113db544966599aa406b68a, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0
@@ -1016,20 +1027,8 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5860921149272050638, guid: 462fe28f3113db544966599aa406b68a, type: 3}
-      propertyPath: stats.Damage
+      propertyPath: stats.MoveSpeed
       value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 5860921149272050638, guid: 462fe28f3113db544966599aa406b68a, type: 3}
-      propertyPath: stats.AttackRange
-      value: 15
-      objectReference: {fileID: 0}
-    - target: {fileID: 5860921149272050638, guid: 462fe28f3113db544966599aa406b68a, type: 3}
-      propertyPath: stats.AttackCooldown
-      value: 1.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 5860921149272050638, guid: 462fe28f3113db544966599aa406b68a, type: 3}
-      propertyPath: stats.SecondaryTargetRange
-      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 8654043777371239244, guid: 462fe28f3113db544966599aa406b68a, type: 3}
       propertyPath: m_LocalPosition.x
