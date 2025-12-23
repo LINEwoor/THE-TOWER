@@ -74,6 +74,8 @@ public class Health : MonoBehaviour
     private void Die()
     {
         onDeath?.Invoke();
+        if(isPlayer)
+            Time.timeScale = 0;
     }
 
     public void UpdateMaxHealth(float newMaxHealth)

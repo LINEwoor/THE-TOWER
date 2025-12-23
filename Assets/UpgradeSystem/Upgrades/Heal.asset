@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   displayName: Heal
   description: Heal 25 hp
-  icon: {fileID: 0}
+  icon: {fileID: 21300000, guid: bd5a750182194b84b9b44a6c33813a97, type: 3}
   rarity: 1
   idEffect: heal
   value: 25

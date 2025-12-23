@@ -9,6 +9,8 @@ public interface IEnemy
     EnemyStats Stats { get; }
     Transform CurrentTarget { get; set; }
     Transform MainTarget { get; set; }
+    Animator Animator { get; set; }
+    
     
     void TakeDamage(float amount);
     void SetState(IState newState);

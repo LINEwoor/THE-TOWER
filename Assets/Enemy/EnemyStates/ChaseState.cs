@@ -17,6 +17,7 @@ public class ChaseState : IState
         
         if (enemy.Agent != null && target != null)
         {
+            enemy.Animator.SetBool("isRunning", true);
             enemy.Agent.isStopped = false;
             enemy.Agent.SetDestination(target.position);
         }

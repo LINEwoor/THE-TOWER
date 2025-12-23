@@ -26,16 +26,25 @@ public class RangedAttackState : AttackState
     public override void Enter()
     {
         base.Enter();
+        enemy.DetectTargets();
     }
 
     protected override void Attack()
     {
-        if (projectilePrefab == null || firePoint == null || target == null)
+        enemy.Animator.SetTrigger("Attack");
+    }
+
+    public void ExecuteRangedAttack()
+    {
+        Debug.Log(3);
+        
+        if (projectilePrefab == null || firePoint == null || target == null || !IsTargetAlive(target))
         {
+            Debug.Log(projectilePrefab == null || firePoint == null || target == null || !IsTargetAlive(target));
             enemy.DetectTargets();
             return;
         }
-
+        
         GameObject projectile = GameObject.Instantiate(
             projectilePrefab,
             firePoint.position,
@@ -47,5 +56,12 @@ public class RangedAttackState : AttackState
         {
             projectileScript.Initialize(target, enemy.Stats.Damage, projectileSpeed);
         }
+    }
+
+    private bool IsTargetAlive(Transform target)
+    {
+        if (target == null) return false;
+        var health = target.GetComponent<Health>();
+        return health == null || health.CurrentHealth > 0;
     }
 }

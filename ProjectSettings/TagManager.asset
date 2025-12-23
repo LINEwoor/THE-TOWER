@@ -8,6 +8,7 @@ TagManager:
   - Enemy
   - Dead
   - MinerManager
+  - LosePanel
   layers:
   - Default
   - TransparentFX

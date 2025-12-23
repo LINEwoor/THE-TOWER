@@ -40,7 +40,7 @@ public class EnemySpawner : MonoBehaviour
             if (playerObj != null) player = playerObj.transform;
         }
 
-        StartCoroutine(SpawnWaveWithDelay(2));
+        StartCoroutine(SpawnWaveWithDelay(5));
     }
 
     IEnumerator SpawnWaveWithDelay(int delay)

@@ -18,6 +18,9 @@ public class Miner : MonoBehaviour
     [SerializeField] private float enemySearchInterval = 1f;
     private float resSearchTimer = 0f;
     private float enemySearchTimer = 0f;
+    public Animator animator;
+    
+    private bool isMoving = false;
 
     void Start()
     {
@@ -25,6 +28,11 @@ public class Miner : MonoBehaviour
         if (tower == null)
         {
             tower = GameObject.FindGameObjectWithTag("Player");
+        }
+        
+        if (animator == null)
+        {
+            animator = GetComponent<Animator>();
         }
     }
 
@@ -47,6 +55,8 @@ public class Miner : MonoBehaviour
         }
 
         transform.position += transform.forward * moveSpeed * Time.deltaTime;
+        
+        isMoving = true;
     }
     
     public GameObject GetClosestObject()
@@ -77,6 +87,8 @@ public class Miner : MonoBehaviour
     {
         if (ru == null) return;
         
+        isMoving = false;
+        
         if (ru.IsCarryingResource())
         {
             if (tower != null)
@@ -88,6 +100,8 @@ public class Miner : MonoBehaviour
             if (g != null)
                 Move(g.transform);
         }
+        
+        UpdateAnimator();
     }
     
     void Damage()
@@ -107,6 +121,8 @@ public class Miner : MonoBehaviour
         if (target == null)
         {
             isAttacking = false;
+            isMoving = false;
+            UpdateAnimator();
             return;
         }
 
@@ -117,6 +133,7 @@ public class Miner : MonoBehaviour
         }
         else
         {
+            isMoving = false;
             if (timeAttack > 0)
             {
                 timeAttack -= Time.deltaTime;
@@ -128,10 +145,14 @@ public class Miner : MonoBehaviour
             }
         }
         
+        UpdateAnimator();
+        
         if (target.tag == "Dead")
         {
             isAttacking = false;
+            isMoving = false;
             target = null;
+            UpdateAnimator();
         }
     }
 
@@ -146,6 +167,14 @@ public class Miner : MonoBehaviour
                 target = collider.gameObject;
                 break;
             }
+        }
+    }
+    
+    void UpdateAnimator()
+    {
+        if (animator != null)
+        {
+            animator.SetBool("isRunning", isMoving);
         }
     }
     

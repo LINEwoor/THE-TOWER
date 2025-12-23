@@ -30,18 +30,21 @@ public abstract class BaseEnemy : MonoBehaviour, IEnemy
     public GameObject GameObject => gameObject;
     public NavMeshAgent Agent => agent;
     public EnemyStats Stats => stats;
-    
+    public Animator animator;
     public Transform CurrentTarget
     {
         get => currentTarget;
         set => currentTarget = value;
     }
+
+    public Animator Animator { get => animator; set => animator = value; }
     
     public Transform MainTarget
     {
         get => mainTarget;
         set => mainTarget = value;
     }
+
 
     protected virtual void Awake()
     {
@@ -81,6 +84,27 @@ public abstract class BaseEnemy : MonoBehaviour, IEnemy
         currentState?.Update();
     }
 
+    public void PerformActualAttack()
+    {
+        if (currentTarget == null || !IsTargetAlive(currentTarget)) 
+            return;
+
+        if (currentState is RangedAttackState rangedState)
+        {
+            rangedState.ExecuteRangedAttack();
+            Debug.Log(2);
+            
+        }
+        else if (currentState is MeleeAttackState meleeState)
+        {
+            meleeState.ExecuteMeleeAttack();
+        }
+        else if (currentState is AttackState attackState)
+        {
+            attackState.ExecuteAttack();
+        }
+    }
+    
     private void FindInitialTarget()
     {
         if (mainTarget == null)
@@ -94,6 +118,8 @@ public abstract class BaseEnemy : MonoBehaviour, IEnemy
             }
         }
     }
+
+
 
     public virtual void TakeDamage(float amount)
     {
@@ -174,6 +200,9 @@ public abstract class BaseEnemy : MonoBehaviour, IEnemy
             }
         }
     }
+
+
+
 
     private Transform FindNearestTarget()
     {

@@ -50,6 +50,29 @@ public class AttackState : IState
             attackTimer = 0f;
         }
     }
+    
+    public void ExecuteAttack()
+    {
+        if (target == null || !IsTargetAlive(target))
+        {
+            enemy.DetectTargets();
+            return;
+        }
+
+        Health targetHealth = target.GetComponent<Health>();
+        if (targetHealth != null)
+        {
+            targetHealth.TakeDamage(enemy.Stats.Damage);
+        }
+    }
+    
+    
+    private bool IsTargetAlive(Transform target)
+    {
+        if (target == null) return false;
+        var health = target.GetComponent<Health>();
+        return health == null || health.CurrentHealth > 0;
+    }
 
     public virtual void Exit() 
     {
@@ -58,6 +81,7 @@ public class AttackState : IState
 
     protected virtual void Attack()
     {
+        enemy.Animator.SetTrigger("Attack");
         Health targetHealth = target.GetComponent<Health>();
         if (targetHealth != null)
         {
