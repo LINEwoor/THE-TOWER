@@ -28,9 +28,6 @@ public class ResoursesUppers : MonoBehaviour,IRes
             other.tag = "Untagged";
             other.gameObject.SetActive(false);
         }
-        if (other.tag == "Tower")
-        {
-            thisRes = Resourses.None;
-        }
+        
     }
 }
