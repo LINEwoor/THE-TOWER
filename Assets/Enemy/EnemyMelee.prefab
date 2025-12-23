@@ -122,9 +122,10 @@ GameObject:
   - component: {fileID: 508546618023616024}
   - component: {fileID: 1832573529096294485}
   - component: {fileID: 2318878181128364968}
+  - component: {fileID: 2622882274079109075}
   m_Layer: 0
   m_Name: EnemyMelee
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -159,7 +160,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   stats:
-    Damage: 2
+    Damage: 5
     MoveSpeed: 3.5
     AttackRange: 2
     AttackCooldown: 1
@@ -220,6 +221,29 @@ MonoBehaviour:
   onHealthChange:
     m_PersistentCalls:
       m_Calls: []
+--- !u!136 &2622882274079109075
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4968835646196733507}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.5
+  m_Height: 1
+  m_Direction: 1
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1001 &3372362144218200352
 PrefabInstance:
   m_ObjectHideFlags: 0

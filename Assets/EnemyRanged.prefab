@@ -259,9 +259,10 @@ GameObject:
   - component: {fileID: 7354563767961286850}
   - component: {fileID: 5860921149272050638}
   - component: {fileID: 8492275162939811157}
+  - component: {fileID: 4321146931493316840}
   m_Layer: 0
   m_Name: EnemyRanged
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -320,12 +321,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   stats:
-    Damage: 10
+    Damage: 2
     MoveSpeed: 3.5
-    AttackRange: 2
-    AttackCooldown: 1
-    DetectionRange: 15
-    SecondaryTargetRange: 5
+    AttackRange: 7
+    AttackCooldown: 2
+    DetectionRange: 7
+    SecondaryTargetRange: 7
   targetLayer:
     serializedVersion: 2
     m_Bits: 64
@@ -345,6 +346,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 01b704bb6a2248743996cb0394409a0a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isPlayer: 0
   maxHealth: 6
   onHealed:
     m_PersistentCalls:
@@ -358,6 +360,29 @@ MonoBehaviour:
   onHealthChange:
     m_PersistentCalls:
       m_Calls: []
+--- !u!136 &4321146931493316840
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8862803855159931732}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.5
+  m_Height: 1
+  m_Direction: 1
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1001 &6868835414047992046
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -454,6 +479,10 @@ PrefabInstance:
       propertyPath: healthComponent
       value: 
       objectReference: {fileID: 8492275162939811157}
+    - target: {fileID: 5830011751706013896, guid: 6cfd8468d2436704b81f6f52b238fe05, type: 3}
+      propertyPath: m_PresetInfoIsWorld
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7203392850021738969, guid: 6cfd8468d2436704b81f6f52b238fe05, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0
