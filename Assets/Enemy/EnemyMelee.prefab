@@ -50,9 +50,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   stats:
-    Damage: 5
+    Damage: 8
     MoveSpeed: 3.5
-    AttackRange: 2
+    AttackRange: 2.5
     AttackCooldown: 1
     DetectionRange: 15
     SecondaryTargetRange: 5
@@ -253,6 +253,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 07a2f1affa21bd246af54682c585702e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  enemy: {fileID: 0}
 --- !u!95 &4959776778264735694 stripped
 Animator:
   m_CorrespondingSourceObject: {fileID: 5866666021909216657, guid: 3767cb2a3d1cdb74185ad057d8a631e6, type: 3}

@@ -104,7 +104,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   stats:
-    Damage: 2
+    Damage: 5
     MoveSpeed: 3.5
     AttackRange: 10
     AttackCooldown: 2
@@ -131,7 +131,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isPlayer: 0
-  maxHealth: 6
+  maxHealth: 7
   onHealed:
     m_PersistentCalls:
       m_Calls: []

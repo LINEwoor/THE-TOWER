@@ -161,7 +161,7 @@ public class Miner : MonoBehaviour
         hitColliders = Physics.OverlapSphere(this.transform.position, radios);
         foreach (Collider collider in hitColliders)
         {
-            if (collider.gameObject.tag == "Enemy" && !isAttacking)
+            if (collider.gameObject.tag == "Enemy1" && !isAttacking)
             {
                 isAttacking = true;
                 target = collider.gameObject;

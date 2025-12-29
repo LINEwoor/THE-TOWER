@@ -7,7 +7,6 @@ public class LosePanel : MonoBehaviour
     {
         _health = GameObject.FindGameObjectWithTag("Player").GetComponent<Health>();
         _health.onDeath.AddListener(Show);
-        
     }
 
     void Show()
