@@ -64,7 +64,7 @@ public class WaveUI : MonoBehaviour
         if (waveImage != null)
         {
             waveImage.sprite = waveIcon;
-            waveImage.SetNativeSize();
+            //waveImage.SetNativeSize();
         }
 
         if (_addictiveObjects != null)

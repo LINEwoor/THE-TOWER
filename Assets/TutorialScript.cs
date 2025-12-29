@@ -16,7 +16,7 @@ public class TutorialScript : MonoBehaviour
     {
         isShow = true;
         gameObject.SetActive(true);
-        circle.transform.DOScale((Vector3.one * 0.35f) * 1.2f, 1f)
+        circle.transform.DOScale((Vector3.one * 0.15f) * 1.2f, 1f)
                 .SetEase(Ease.InOutSine)
                 .SetLoops(-1, LoopType.Yoyo)
                 .SetUpdate(true);
