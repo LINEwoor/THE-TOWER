@@ -18,7 +18,11 @@ public class UIMainMenu : MonoBehaviour
 
     void Awake()
     {
-        data.LoadFromJson(); 
+        StartSound();
+    }
+    void StartSound()
+    {
+        data.LoadFromJson();
         Volume = data.volume;
         sl.value = Volume;
         melody.volume = Volume;

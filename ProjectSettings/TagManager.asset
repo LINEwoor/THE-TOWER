@@ -9,6 +9,8 @@ TagManager:
   - Dead
   - MinerManager
   - LosePanel
+  - Tower
+  - Platform
   layers:
   - Default
   - TransparentFX
