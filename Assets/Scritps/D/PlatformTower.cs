@@ -13,7 +13,7 @@ public class PlatformTower : MonoBehaviour, IPointerClickHandler
     [SerializeField] private Material act;
     [SerializeField] private Material NoAct;
 
-    private ResourcesSystem rs;
+    [SerializeField] private ResourcesSystem rs;
     
     void Start()
     {
@@ -32,22 +32,32 @@ public class PlatformTower : MonoBehaviour, IPointerClickHandler
         
     }
 
+    public void ActiveTower()
+    {
+        panelBuild.SetActive(true);
+        ispanelActive = true;
+        mr.material = act;
+    }
+
+    public void NoActiveTower()
+    {
+        panelBuild.SetActive(false);
+        ispanelActive = false;
+        mr.material = NoAct;
+    }
+
     public void ActiveDesckTowerBuild()
     {
         //Debug.Log("p");
         if(!isbuild)
         {
-            if (ispanelActive)
+            if (ispanelActive&&panelBuild.activeSelf==true)
             {
-                panelBuild.SetActive(false);
-                ispanelActive = false;
-                mr.material = NoAct;
+                NoActiveTower();
             }
-            else
+            else if (!ispanelActive&&panelBuild.activeSelf==false) 
             {
-                panelBuild.SetActive(true);
-                ispanelActive = true;
-                mr.material = act;
+                ActiveTower();
             }
         }
         
@@ -55,13 +65,21 @@ public class PlatformTower : MonoBehaviour, IPointerClickHandler
 
     public void BuildTower()
     {
-        if (!isbuild && ispanelActive)
+        if (rs.Stone >= 20 && rs.Wood >= 20 && rs.OilCristall >=10)
         {
-            Instantiate(tower,this.transform.position,this.transform.rotation);
-            panelBuild.SetActive(false);
-            ispanelActive = false;
-            isbuild = true;
+            if (!isbuild && ispanelActive)
+            {
+                Instantiate(tower, this.transform.position, this.transform.rotation);
+                panelBuild.SetActive(false);
+                ispanelActive = false;
+                isbuild = true;
+                rs.SubStone(20);
+                rs.SubCristall(10);
+                rs.SubWood(20);
+                NoActiveTower();
+            }
         }
+        
         
     }
     void Update()
