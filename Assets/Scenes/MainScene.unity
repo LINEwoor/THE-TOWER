@@ -1685,6 +1685,18 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5768336809942245594, guid: 883da7ef25e62164b8f4098de1cc00ef, type: 3}
+      propertyPath: heightScale
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5768336809942245594, guid: 883da7ef25e62164b8f4098de1cc00ef, type: 3}
+      propertyPath: heightLevels
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 5768336809942245594, guid: 883da7ef25e62164b8f4098de1cc00ef, type: 3}
+      propertyPath: heightSmoothness
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6854365351872610471, guid: 883da7ef25e62164b8f4098de1cc00ef, type: 3}
       propertyPath: waves.Array.data[0].waveIcon
       value: 
