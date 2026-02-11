@@ -1,7 +1,6 @@
 using UnityEngine;
 
 [RequireComponent(typeof(MapGenerator))]
-[RequireComponent(typeof(CloudsSystem))]
 [RequireComponent(typeof(UpgradeManager))]
 public class GameManager : MonoBehaviour
 {
