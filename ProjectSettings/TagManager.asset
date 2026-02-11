@@ -4,13 +4,12 @@
 TagManager:
   serializedVersion: 3
   tags:
-  - Resourses
   - Enemy
-  - Dead
   - MinerManager
   - LosePanel
   - Tower
   - Platform
+  - Resources
   layers:
   - Default
   - TransparentFX
@@ -18,8 +17,8 @@ TagManager:
   - 
   - Water
   - UI
-  - 
-  - 
+  - Ground
+  - Resource
   - 
   - 
   - 

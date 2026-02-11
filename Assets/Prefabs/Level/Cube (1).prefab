@@ -66,7 +66,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 598d5f8f36341cb40bde39e8ee48d8d0, type: 2}
+  - {fileID: 2100000, guid: eecf63c8eb589ac4ca385baa5a0fa4d0, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -121,10 +121,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5612e8c6fd2d9ed42a6fc64b0c45a0f5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tower: {fileID: 8742978865307112017, guid: aea20812355082c49a8858ace2e7822a, type: 3}
+  tower: {fileID: 3834167307820310637, guid: 495e46c90e61a6645bd60a9e30bab8dc, type: 3}
   panelBuild: {fileID: 0}
   ispanelActive: 0
   isbuild: 0
   mr: {fileID: 0}
   act: {fileID: 2100000, guid: af6692a3e58112944a2adbfb1edc9a64, type: 2}
-  NoAct: {fileID: 2100000, guid: 598d5f8f36341cb40bde39e8ee48d8d0, type: 2}
+  NoAct: {fileID: 2100000, guid: eecf63c8eb589ac4ca385baa5a0fa4d0, type: 2}
+  rs: {fileID: 0}

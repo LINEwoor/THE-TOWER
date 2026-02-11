@@ -842,7 +842,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8265556531397197079, guid: d80fe231a77a31a4c877698b7f686496, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.52
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 8265556531397197079, guid: d80fe231a77a31a4c877698b7f686496, type: 3}
       propertyPath: m_LocalPosition.z
@@ -1174,7 +1174,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8265556531397197079, guid: d80fe231a77a31a4c877698b7f686496, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.52
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 8265556531397197079, guid: d80fe231a77a31a4c877698b7f686496, type: 3}
       propertyPath: m_LocalPosition.z
@@ -1275,7 +1275,8 @@ MonoBehaviour:
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: dc07ac637b1eed04bac55d3d3a933d45, type: 2}
   m_sharedMaterial: {fileID: 3630550971035086225, guid: dc07ac637b1eed04bac55d3d3a933d45, type: 2}
-  m_fontSharedMaterials: []
+  m_fontSharedMaterials:
+  - {fileID: 3630550971035086225, guid: dc07ac637b1eed04bac55d3d3a933d45, type: 2}
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
   m_fontColor32:
@@ -1645,6 +1646,26 @@ PrefabInstance:
       propertyPath: m_TagString
       value: MinerManager
       objectReference: {fileID: 0}
+    - target: {fileID: 2046325648755374319, guid: 883da7ef25e62164b8f4098de1cc00ef, type: 3}
+      propertyPath: spawnInterval
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2046325648755374319, guid: 883da7ef25e62164b8f4098de1cc00ef, type: 3}
+      propertyPath: groundLayer.m_Bits
+      value: 64
+      objectReference: {fileID: 0}
+    - target: {fileID: 2046325648755374319, guid: 883da7ef25e62164b8f4098de1cc00ef, type: 3}
+      propertyPath: resourceHeightOffset
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2046325648755374319, guid: 883da7ef25e62164b8f4098de1cc00ef, type: 3}
+      propertyPath: resourceLayer.m_Bits
+      value: 128
+      objectReference: {fileID: 0}
+    - target: {fileID: 2274785038963217868, guid: 883da7ef25e62164b8f4098de1cc00ef, type: 3}
+      propertyPath: minerPrefab
+      value: 
+      objectReference: {fileID: 2751426938793086938, guid: 563c37d0eacbdb946b91f56194d4834c, type: 3}
     - target: {fileID: 4852543059089127208, guid: 883da7ef25e62164b8f4098de1cc00ef, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -1687,11 +1708,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5768336809942245594, guid: 883da7ef25e62164b8f4098de1cc00ef, type: 3}
       propertyPath: heightScale
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 5768336809942245594, guid: 883da7ef25e62164b8f4098de1cc00ef, type: 3}
       propertyPath: heightLevels
-      value: 15
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 5768336809942245594, guid: 883da7ef25e62164b8f4098de1cc00ef, type: 3}
       propertyPath: heightSmoothness
@@ -1715,7 +1736,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6854365351872610471, guid: 883da7ef25e62164b8f4098de1cc00ef, type: 3}
       propertyPath: waves.Array.data[0].enemyCount
-      value: 15
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 6854365351872610471, guid: 883da7ef25e62164b8f4098de1cc00ef, type: 3}
       propertyPath: waves.Array.data[0].spawnDelay
@@ -1723,7 +1744,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6854365351872610471, guid: 883da7ef25e62164b8f4098de1cc00ef, type: 3}
       propertyPath: waves.Array.data[1].enemyCount
-      value: 15
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 6854365351872610471, guid: 883da7ef25e62164b8f4098de1cc00ef, type: 3}
       propertyPath: waves.Array.data[1].spawnDelay
@@ -1731,12 +1752,24 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6854365351872610471, guid: 883da7ef25e62164b8f4098de1cc00ef, type: 3}
       propertyPath: waves.Array.data[2].enemyCount
-      value: 50
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 6854365351872610471, guid: 883da7ef25e62164b8f4098de1cc00ef, type: 3}
       propertyPath: waves.Array.data[2].spawnDelay
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 6854365351872610471, guid: 883da7ef25e62164b8f4098de1cc00ef, type: 3}
+      propertyPath: infiniteWaveEnemyPrefabs.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6854365351872610471, guid: 883da7ef25e62164b8f4098de1cc00ef, type: 3}
+      propertyPath: 'infiniteWaveEnemyPrefabs.Array.data[0]'
+      value: 
+      objectReference: {fileID: 4968835646196733507, guid: a00739a682b148041938cbeea189719c, type: 3}
+    - target: {fileID: 6854365351872610471, guid: 883da7ef25e62164b8f4098de1cc00ef, type: 3}
+      propertyPath: 'infiniteWaveEnemyPrefabs.Array.data[1]'
+      value: 
+      objectReference: {fileID: 8862803855159931732, guid: 462fe28f3113db544966599aa406b68a, type: 3}
     - target: {fileID: 6854365351872610471, guid: 883da7ef25e62164b8f4098de1cc00ef, type: 3}
       propertyPath: waves.Array.data[0].enemyPrefabs.Array.size
       value: 1
@@ -1970,7 +2003,8 @@ MonoBehaviour:
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: dc07ac637b1eed04bac55d3d3a933d45, type: 2}
   m_sharedMaterial: {fileID: 3630550971035086225, guid: dc07ac637b1eed04bac55d3d3a933d45, type: 2}
-  m_fontSharedMaterials: []
+  m_fontSharedMaterials:
+  - {fileID: 3630550971035086225, guid: dc07ac637b1eed04bac55d3d3a933d45, type: 2}
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
   m_fontColor32:
@@ -2261,7 +2295,8 @@ MonoBehaviour:
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: dc07ac637b1eed04bac55d3d3a933d45, type: 2}
   m_sharedMaterial: {fileID: 3630550971035086225, guid: dc07ac637b1eed04bac55d3d3a933d45, type: 2}
-  m_fontSharedMaterials: []
+  m_fontSharedMaterials:
+  - {fileID: 3630550971035086225, guid: dc07ac637b1eed04bac55d3d3a933d45, type: 2}
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
   m_fontColor32:
@@ -2536,7 +2571,8 @@ MonoBehaviour:
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: dc07ac637b1eed04bac55d3d3a933d45, type: 2}
   m_sharedMaterial: {fileID: 3630550971035086225, guid: dc07ac637b1eed04bac55d3d3a933d45, type: 2}
-  m_fontSharedMaterials: []
+  m_fontSharedMaterials:
+  - {fileID: 3630550971035086225, guid: dc07ac637b1eed04bac55d3d3a933d45, type: 2}
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
   m_fontColor32:
@@ -2654,7 +2690,8 @@ MonoBehaviour:
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: dc07ac637b1eed04bac55d3d3a933d45, type: 2}
   m_sharedMaterial: {fileID: 3630550971035086225, guid: dc07ac637b1eed04bac55d3d3a933d45, type: 2}
-  m_fontSharedMaterials: []
+  m_fontSharedMaterials:
+  - {fileID: 3630550971035086225, guid: dc07ac637b1eed04bac55d3d3a933d45, type: 2}
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
   m_fontColor32:
@@ -3248,7 +3285,8 @@ MonoBehaviour:
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: dc07ac637b1eed04bac55d3d3a933d45, type: 2}
   m_sharedMaterial: {fileID: 3630550971035086225, guid: dc07ac637b1eed04bac55d3d3a933d45, type: 2}
-  m_fontSharedMaterials: []
+  m_fontSharedMaterials:
+  - {fileID: 3630550971035086225, guid: dc07ac637b1eed04bac55d3d3a933d45, type: 2}
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
   m_fontColor32:
@@ -3472,7 +3510,8 @@ MonoBehaviour:
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: dc07ac637b1eed04bac55d3d3a933d45, type: 2}
   m_sharedMaterial: {fileID: 3630550971035086225, guid: dc07ac637b1eed04bac55d3d3a933d45, type: 2}
-  m_fontSharedMaterials: []
+  m_fontSharedMaterials:
+  - {fileID: 3630550971035086225, guid: dc07ac637b1eed04bac55d3d3a933d45, type: 2}
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
   m_fontColor32:
@@ -3704,7 +3743,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1507636620937791777, guid: 7097ba7ba649e1f41bba232312bdcbd8, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.433
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 1507636620937791777, guid: 7097ba7ba649e1f41bba232312bdcbd8, type: 3}
       propertyPath: m_LocalPosition.z
@@ -3921,7 +3960,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8265556531397197079, guid: d80fe231a77a31a4c877698b7f686496, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.52
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 8265556531397197079, guid: d80fe231a77a31a4c877698b7f686496, type: 3}
       propertyPath: m_LocalPosition.z
@@ -3981,7 +4020,7 @@ MonoBehaviour:
   maxOffset: 5
   zoomSpeed: 30
   minFOV: 20
-  maxFOV: 100
+  maxFOV: 140
   smoothTime: 5
 --- !u!82 &1930090376 stripped
 AudioSource:

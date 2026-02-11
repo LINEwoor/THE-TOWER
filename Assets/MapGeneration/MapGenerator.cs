@@ -247,6 +247,10 @@ public class MapGenerator : MonoBehaviour
         NavMeshSurface surface = gameObject.AddComponent<NavMeshSurface>();
         surface.useGeometry = NavMeshCollectGeometry.PhysicsColliders;
         surface.agentTypeID = 0;
+        surface.overrideTileSize = true;
+        surface.overrideVoxelSize = true;
+        surface.voxelSize = 0.2f;
+        surface.tileSize = 32;
         surface.BuildNavMesh();
     }
 

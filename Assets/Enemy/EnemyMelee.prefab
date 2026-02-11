@@ -49,13 +49,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0277437be9dd464ebb94824b22dd86fa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  stats:
-    Damage: 8
+  baseStats:
+    Damage: 10
     MoveSpeed: 3.5
-    AttackRange: 2.5
+    AttackRange: 2
     AttackCooldown: 1
     DetectionRange: 15
     SecondaryTargetRange: 5
+    MaxHealth: 9
   targetLayer:
     serializedVersion: 2
     m_Bits: 0

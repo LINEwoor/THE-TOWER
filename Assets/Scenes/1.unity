@@ -169,6 +169,7 @@ MonoBehaviour:
   mr: {fileID: 0}
   act: {fileID: 2100000, guid: af6692a3e58112944a2adbfb1edc9a64, type: 2}
   NoAct: {fileID: 2100000, guid: 598d5f8f36341cb40bde39e8ee48d8d0, type: 2}
+  rs: {fileID: 0}
 --- !u!65 &163440480
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -297,6 +298,7 @@ MonoBehaviour:
   mr: {fileID: 0}
   act: {fileID: 2100000, guid: af6692a3e58112944a2adbfb1edc9a64, type: 2}
   NoAct: {fileID: 2100000, guid: 598d5f8f36341cb40bde39e8ee48d8d0, type: 2}
+  rs: {fileID: 0}
 --- !u!65 &425411126
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -425,6 +427,7 @@ MonoBehaviour:
   mr: {fileID: 0}
   act: {fileID: 2100000, guid: af6692a3e58112944a2adbfb1edc9a64, type: 2}
   NoAct: {fileID: 2100000, guid: 598d5f8f36341cb40bde39e8ee48d8d0, type: 2}
+  rs: {fileID: 0}
 --- !u!65 &485599944
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -877,6 +880,7 @@ MonoBehaviour:
   mr: {fileID: 0}
   act: {fileID: 2100000, guid: af6692a3e58112944a2adbfb1edc9a64, type: 2}
   NoAct: {fileID: 2100000, guid: 598d5f8f36341cb40bde39e8ee48d8d0, type: 2}
+  rs: {fileID: 0}
 --- !u!65 &1435112634
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1005,6 +1009,7 @@ MonoBehaviour:
   mr: {fileID: 0}
   act: {fileID: 2100000, guid: af6692a3e58112944a2adbfb1edc9a64, type: 2}
   NoAct: {fileID: 2100000, guid: 598d5f8f36341cb40bde39e8ee48d8d0, type: 2}
+  rs: {fileID: 0}
 --- !u!65 &1850321204
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1236,13 +1241,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   resPrefabs: {fileID: 1178846339210079937, guid: 346d052f1796ecc46b820022b80e64ce, type: 3}
   spawnInterval: 3
-  currentTimer: 0
   minSpawnRadius: 3
   maxSpawnRadius: 10
   maxTotalResources: 20
-  currentResourcesCount: 0
   spawnAroundPlayer: 1
   spawnCenter: {fileID: 0}
+  resourceHeightOffset: 0.2
+  checkRadius: 0.5
+  groundLayer:
+    serializedVersion: 2
+    m_Bits: 0
+  resourceLayer:
+    serializedVersion: 2
+    m_Bits: 0
+  maxSpawnAttempts: 30
 --- !u!136 &1859253758
 CapsuleCollider:
   m_ObjectHideFlags: 0

@@ -264,6 +264,7 @@ GameObject:
   - component: {fileID: 547189733}
   - component: {fileID: 547189735}
   - component: {fileID: 547189736}
+  - component: {fileID: 547189737}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -289,11 +290,13 @@ MonoBehaviour:
   grassPrefab: {fileID: 1324065551131666060, guid: 799781016f5bf254d8dea4789416ebed, type: 3}
   dirtPrefab: {fileID: 5738187420809090597, guid: 9ee640879498da74eaa83a77d483cc69, type: 3}
   stonePrefab: {fileID: 4808109567541246743, guid: a55fbca5521b8934cac38a1e45193a7c, type: 3}
+  heightScale: 2
+  heightLevels: 20
   noiseScale: 5
   dirtThreshold: 0.6
   stoneThreshold: 0.8
-  decorations: []
-  camera: {fileID: 1169673289}
+  heightNoiseScale: 5
+  heightSmoothness: 0.5
   mainTower: {fileID: 3858414440965356357, guid: 353c9c43ca5129c48a57dce57635fc5f, type: 3}
 --- !u!4 &547189734
 Transform:
@@ -324,13 +327,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cloudsPrefabs:
   - {fileID: 8550304351487363159, guid: 8f5cbe5c2afef8246bf4b123cad8eac9, type: 3}
-  cloudSpeed: 5
-  maxClouds: 25
-  startPositionX: 150
-  endPositionX: 0
-  startPositionZ: 100
-  endPositionZ: 0
+  spawnInterval: 2
+  minY: 2
+  maxY: 5
+  minSpeed: 0.5
+  maxSpeed: 2
+  minScale: 0.5
+  maxScale: 1.5
+  spawnX: 12
+  destroyX: -12
   initialCloudCount: 25
+  minInitialX: -8
+  maxInitialX: 8
 --- !u!114 &547189736
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -343,6 +351,26 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eea3f7a7e1bc2b2468e6e40d038164ae, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &547189737
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 547189732}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bf7f6c817ca20e14a918844ce13c5ee6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  allUpgrades: []
+  upgradesToShow: 3
+  OnUpgradesReady:
+    m_PersistentCalls:
+      m_Calls: []
+  OnUpgradeSelected:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &946901441
 GameObject:
   m_ObjectHideFlags: 0
@@ -783,7 +811,8 @@ MonoBehaviour:
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_fontSharedMaterials: []
+  m_fontSharedMaterials:
+  - {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
   m_fontColor32:

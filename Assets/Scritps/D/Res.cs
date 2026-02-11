@@ -4,57 +4,68 @@ public class Res : MonoBehaviour, IRes
 {
     public enum Resourses { Wood, Stone, OilCristall, None }
     public Resourses ress;
-    public Renderer rd;
-    
+
     [SerializeField] private int resourceValue = 10;
-    
+    [SerializeField] private GameObject woodModel;
+    [SerializeField] private GameObject stoneModel;
+    [SerializeField] private GameObject oilModel;
+
     void Start()
     {
-        rd = GetComponent<Renderer>();
         GenerateRandomResource();
     }
-    
+
     private void GenerateRandomResource()
     {
+        woodModel.SetActive(false);
+        stoneModel.SetActive(false);
+        if (oilModel != null) oilModel.SetActive(false);
+
         int i = Random.Range(0, 3);
-        
+
         switch (i)
         {
             case 0:
                 ress = Resourses.Wood;
-                rd.material.color = new Color(0.65f, 0.46f, 0.16f);
+                woodModel.SetActive(true);
                 break;
             case 1:
                 ress = Resourses.Stone;
-                rd.material.color = new Color(0.5f, 0.5f, 0.5f);
+                stoneModel.SetActive(true);
                 break;
-   
         }
-        
-        Color randomVariance = new Color(
-            Random.Range(-0.1f, 0.1f),
-            Random.Range(-0.1f, 0.1f),
-            Random.Range(-0.1f, 0.1f)
-        );
-        rd.material.color += randomVariance;
     }
-    
+
     public Resourses GetResourceType()
     {
         return ress;
     }
-    
+
     public int GetResourceValue()
     {
         return resourceValue;
     }
-    
+
     public void SetupResource(Resourses type, int value = 10)
     {
         ress = type;
         resourceValue = value;
-        
-        if (rd == null) rd = GetComponent<Renderer>();
-        
+
+        woodModel.SetActive(false);
+        stoneModel.SetActive(false);
+        if (oilModel != null) oilModel.SetActive(false);
+
+        switch (type)
+        {
+            case Resourses.Wood:
+                woodModel.SetActive(true);
+                break;
+            case Resourses.Stone:
+                stoneModel.SetActive(true);
+                break;
+            case Resourses.OilCristall:
+                if (oilModel != null) oilModel.SetActive(true);
+                break;
+        }
     }
 }

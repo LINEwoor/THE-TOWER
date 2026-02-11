@@ -18,5 +18,6 @@ public class TileData
     public bool isBuildable = true;
     public float height = 0f;
     public float noiseValue;
+    public float GetHeight() => height;
 }
 

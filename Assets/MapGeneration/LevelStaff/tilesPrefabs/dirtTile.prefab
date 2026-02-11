@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5353187536667608411}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: dirtTile
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -88,20 +88,24 @@ PrefabInstance:
       propertyPath: m_Name
       value: tile-dirt
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 230eda3a7c0d2494e856e141179deb17, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 230eda3a7c0d2494e856e141179deb17, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 7569143538792571310}
+      addedObject: {fileID: 3499805861120844841}
   m_SourcePrefab: {fileID: 100100000, guid: 230eda3a7c0d2494e856e141179deb17, type: 3}
 --- !u!1 &1320177584168189647 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 230eda3a7c0d2494e856e141179deb17, type: 3}
   m_PrefabInstance: {fileID: 2203209462679471006}
   m_PrefabAsset: {fileID: 0}
---- !u!65 &7569143538792571310
+--- !u!65 &3499805861120844841
 BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

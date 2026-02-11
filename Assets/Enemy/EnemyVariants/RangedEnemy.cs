@@ -18,7 +18,7 @@ namespace Enemy.EnemyVariants
         
             if (agent != null)
             {
-                agent.stoppingDistance = stats.AttackRange * 0.8f;
+                agent.stoppingDistance = currentStats.AttackRange * 0.8f;
             }
         }
     }

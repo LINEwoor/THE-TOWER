@@ -5,56 +5,36 @@ public class ResoursesUppers : MonoBehaviour, IRes
     public enum Resourses { Wood, Stone, OilCristall, None }
     private ResourcesSystem _resourcesSystem;
     public Resourses thisRes;
-    
+
     [SerializeField] private int resourceAmount = 10;
-    [SerializeField] private GameObject carriedResource;
+    [SerializeField] public GameObject carriedResource;
 
     void Start()
     {
         _resourcesSystem = FindFirstObjectByType<ResourcesSystem>();
     }
 
-    void Update()
+    public void CollectResource(GameObject resourceObject)
     {
-        
-    }
+        Res resComponent = resourceObject.GetComponent<Res>();
+        if (resComponent != null)
+        {
+            thisRes = (Resourses)resComponent.ress;
 
-    private void OnTriggerEnter(Collider other)
-    {
-        if (other.tag == "Resourses")
-        {
-            Res resComponent = other.GetComponent<Res>();
-            if (resComponent != null)
-            {
-                thisRes = (Resourses)resComponent.ress;
-                other.tag = "Untagged";
-                other.gameObject.SetActive(false);
-                
-                if (carriedResource != null)
-                {
-                    carriedResource.SetActive(true);
-                    Renderer rend = carriedResource.GetComponent<Renderer>();
-   
-                }
-            }
-        }
-        
-        if (other.tag == "Player" && thisRes != Resourses.None)
-        {
-            DeliverResources();
-            thisRes = Resourses.None;
-            
+            Destroy(resourceObject);
+
             if (carriedResource != null)
             {
-                carriedResource.SetActive(false);
+                carriedResource.SetActive(true);
+                
             }
         }
     }
-    
-    private void DeliverResources()
+
+    public void DeliverResources()
     {
         if (_resourcesSystem == null) return;
-        
+
         switch (thisRes)
         {
             case Resourses.Wood:
@@ -67,15 +47,22 @@ public class ResoursesUppers : MonoBehaviour, IRes
                 _resourcesSystem.AddCristall(resourceAmount);
                 break;
         }
-        
     }
-    
-    
+
+    public void ResetResource()
+    {
+        thisRes = Resourses.None;
+        if (carriedResource != null)
+        {
+            carriedResource.SetActive(false);
+        }
+    }
+
     public bool IsCarryingResource()
     {
         return thisRes != Resourses.None;
     }
-    
+
     public Resourses GetCarriedResourceType()
     {
         return thisRes;

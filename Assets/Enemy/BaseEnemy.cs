@@ -12,25 +12,29 @@ public class EnemyStats
     public float AttackCooldown = 1f;
     public float DetectionRange = 15f;
     public float SecondaryTargetRange = 5f;
+    public float MaxHealth = 100f;
 }
 
 public abstract class BaseEnemy : MonoBehaviour, IEnemy
 {
-    [SerializeField] protected EnemyStats stats = new EnemyStats();
+    [SerializeField] protected EnemyStats baseStats = new EnemyStats();
+    protected EnemyStats currentStats = new EnemyStats();
+
     Health healthComponent;
     [SerializeField] protected LayerMask targetLayer;
-    
+
     [SerializeField] protected Transform mainTarget;
-    
+
     protected NavMeshAgent agent;
     protected Transform currentTarget;
     protected IState currentState;
-    
+
     public Transform Transform => transform;
     public GameObject GameObject => gameObject;
     public NavMeshAgent Agent => agent;
-    public EnemyStats Stats => stats;
+    public EnemyStats Stats => currentStats;
     public Animator animator;
+
     public Transform CurrentTarget
     {
         get => currentTarget;
@@ -38,25 +42,27 @@ public abstract class BaseEnemy : MonoBehaviour, IEnemy
     }
 
     public Animator Animator { get => animator; set => animator = value; }
-    
+
     public Transform MainTarget
     {
         get => mainTarget;
         set => mainTarget = value;
     }
 
-
     protected virtual void Awake()
     {
+        // Копируем базовые статы в текущие
+        CopyStats(baseStats, currentStats);
+
         healthComponent = GetComponent<Health>();
         healthComponent.onDeath.AddListener(Die);
+
         agent = GetComponent<NavMeshAgent>();
-        if (agent == null) 
+        if (agent == null)
             agent = gameObject.AddComponent<NavMeshAgent>();
-        
-        agent.speed = stats.MoveSpeed;
-        agent.stoppingDistance = stats.AttackRange - 0.1f;
-        
+
+        ApplyCurrentStats();
+
         if (mainTarget == null)
         {
             GameObject player = GameObject.FindGameObjectWithTag("Player");
@@ -67,7 +73,6 @@ public abstract class BaseEnemy : MonoBehaviour, IEnemy
 
     protected virtual void Start()
     {
-        
         if (mainTarget != null)
         {
             currentTarget = mainTarget;
@@ -86,14 +91,14 @@ public abstract class BaseEnemy : MonoBehaviour, IEnemy
 
     public void PerformActualAttack()
     {
-        if (currentTarget == null || !IsTargetAlive(currentTarget)) 
+        if (currentTarget == null || !IsTargetAlive(currentTarget))
             return;
 
         if (currentState is RangedAttackState rangedState)
         {
             rangedState.ExecuteRangedAttack();
             Debug.Log(2);
-            
+
         }
         else if (currentState is MeleeAttackState meleeState)
         {
@@ -104,7 +109,7 @@ public abstract class BaseEnemy : MonoBehaviour, IEnemy
             attackState.ExecuteAttack();
         }
     }
-    
+
     private void FindInitialTarget()
     {
         if (mainTarget == null)
@@ -118,8 +123,6 @@ public abstract class BaseEnemy : MonoBehaviour, IEnemy
             }
         }
     }
-
-
 
     public virtual void TakeDamage(float amount)
     {
@@ -141,8 +144,8 @@ public abstract class BaseEnemy : MonoBehaviour, IEnemy
         if (currentTarget != null && IsTargetAlive(currentTarget))
         {
             float distance = Vector3.Distance(transform.position, currentTarget.position);
-            
-            if (distance <= stats.AttackRange)
+
+            if (distance <= currentStats.AttackRange)
             {
                 if (currentState is ChaseState)
                 {
@@ -168,13 +171,13 @@ public abstract class BaseEnemy : MonoBehaviour, IEnemy
         }
 
         Transform foundTarget = FindNearestTarget();
-        
+
         if (foundTarget != null)
         {
             currentTarget = foundTarget;
             float distance = Vector3.Distance(transform.position, foundTarget.position);
-            
-            if (distance <= stats.AttackRange)
+
+            if (distance <= currentStats.AttackRange)
             {
                 bool isRangedEnemy = gameObject.GetComponent<RangedEnemy>() != null;
                 if (isRangedEnemy)
@@ -201,9 +204,6 @@ public abstract class BaseEnemy : MonoBehaviour, IEnemy
         }
     }
 
-
-
-
     private Transform FindNearestTarget()
     {
         if (mainTarget != null && IsTargetAlive(mainTarget))
@@ -212,18 +212,18 @@ public abstract class BaseEnemy : MonoBehaviour, IEnemy
         }
 
         Collider[] colliders = Physics.OverlapSphere(
-            transform.position, 
-            stats.DetectionRange, 
+            transform.position,
+            currentStats.DetectionRange,
             targetLayer
         );
-        
+
         Transform closestTarget = null;
         float closestDistance = Mathf.Infinity;
-        
+
         foreach (var collider in colliders)
         {
             Transform potentialTarget = collider.transform;
-            
+
             if (IsTargetAlive(potentialTarget))
             {
                 float distance = Vector3.Distance(transform.position, potentialTarget.position);
@@ -234,14 +234,14 @@ public abstract class BaseEnemy : MonoBehaviour, IEnemy
                 }
             }
         }
-        
+
         return closestTarget;
     }
 
     protected virtual bool IsTargetAlive(Transform target)
     {
         if (target == null) return false;
-        
+
         var health = target.GetComponent<Health>();
         return health == null || health.CurrentHealth > 0;
     }
@@ -252,4 +252,50 @@ public abstract class BaseEnemy : MonoBehaviour, IEnemy
         Destroy(gameObject, 0.1f);
     }
 
+    protected virtual void ApplyCurrentStats()
+    {
+        if (agent != null)
+        {
+            agent.speed = currentStats.MoveSpeed;
+            agent.stoppingDistance = currentStats.AttackRange - 0.1f;
+        }
+
+        if (healthComponent != null)
+        {
+            healthComponent.maxHealth = Mathf.RoundToInt(currentStats.MaxHealth);
+            //healthComponent.CurrentHealth = healthComponent.maxHealth;
+        }
+    }
+
+    public virtual void ScaleStats(float multiplier)
+    {
+        currentStats.Damage = baseStats.Damage * multiplier;
+        currentStats.AttackRange = baseStats.AttackRange;
+        currentStats.MaxHealth = baseStats.MaxHealth * multiplier;
+        currentStats.SecondaryTargetRange = baseStats.SecondaryTargetRange;
+
+        ApplyCurrentStats();
+    }
+
+    protected void CopyStats(EnemyStats source, EnemyStats destination)
+    {
+        destination.Damage = source.Damage;
+        destination.MoveSpeed = source.MoveSpeed;
+        destination.AttackRange = source.AttackRange;
+        destination.AttackCooldown = source.AttackCooldown;
+        destination.DetectionRange = source.DetectionRange;
+        destination.SecondaryTargetRange = source.SecondaryTargetRange;
+        destination.MaxHealth = source.MaxHealth;
+    }
+
+    public virtual void ResetStats()
+    {
+        CopyStats(baseStats, currentStats);
+        ApplyCurrentStats();
+    }
+
+    public EnemyStats GetBaseStats()
+    {
+        return baseStats;
+    }
 }
